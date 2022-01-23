@@ -5,30 +5,42 @@
 // -----------------------------------------------------
 
 
+import java.util.Locale;
 import java.util.Random;
+import java.util.Scanner;
 
 public class LadderAndSnake {
 
-    private int numberOfPlayers;
+    private Scanner keyboard = new Scanner(System.in);
+
     private int[][] board;
 
-    private String[][] playerList;
+    private Player[] playerList;
 
     public LadderAndSnake() {
         board = new int[10][10];
     }
 
-    public LadderAndSnake(int players) {
+    public LadderAndSnake(int playerCount) {
         this();
-        this.setNumberOfPlayers(players);
+
+        playerList = new Player[playerCount];
+        initialisePlayers();
+        namePlayers();
     }
 
-    public void setNumberOfPlayers(int numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
+    private void initialisePlayers() {
+        for (int i = 0; i < playerList.length; i++) {
+            playerList[i] = new Player(Integer.toString(i));
+        }
     }
 
-    public int getNumberOfPlayers() {
-        return numberOfPlayers;
+    public void setPlayerList(Player[] playerList) {
+        this.playerList = playerList;
+    }
+
+    public Player[] getPlayerList() {
+        return playerList;
     }
 
     public int flipDice() {
@@ -38,10 +50,34 @@ public class LadderAndSnake {
 
     public void play() {
 
+        determinePlayerOrder();
+
     }
 
-    public void determinePlayerOrder() {
 
+    private void determinePlayerOrder() {
+        
+
+    }
+
+    private void namePlayers() {
+        String answer;
+        do {
+            System.out.println("Would you like to name your players? (yes or no): ");
+            answer = keyboard.next().toLowerCase();
+            if (!(answer.equals("yes") || answer.equals("no"))) {
+                System.out.println("Not a valid answer (yes or no). Try again: ");
+            }
+        } while (!(answer.equals("yes") || answer.equals("no")));
+
+        if (answer.equals("yes")) {
+            for (Player player : playerList) {
+                System.out.println("Please put name for");
+                player.setName(keyboard.next());
+            }
+        } else {
+            System.out.println("No names will be assigned.");
+        }
     }
 
 

@@ -8,9 +8,10 @@ import java.util.Scanner;
 
 public class PlayLadderAndSnake {
 
+    static Scanner keyboard = new Scanner(System.in);
+
     public static void main(String[] args) {
 
-        Scanner keyboard = new Scanner(System.in);
         System.out.println("--------------------------------------------------------------\nWelcome to Ladder and Snake Java program by Artur Gubaidullin\n--------------------------------------------------------------");
 
         System.out.print("Please in put the number of players (between 2 and 4 inclusively): ");
@@ -24,6 +25,7 @@ public class PlayLadderAndSnake {
 
         LadderAndSnake game = new LadderAndSnake(playerCount);
 
-
     }
+
+
 }
