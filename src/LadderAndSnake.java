@@ -7,6 +7,10 @@
 
 public class LadderAndSnake {
 
+    private int numberOfPlayers;
+    private int[][] board;
+
+
 
 
 }
