@@ -5,7 +5,6 @@
 // -----------------------------------------------------
 
 
-import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -31,7 +30,7 @@ public class LadderAndSnake {
 
     private void initialisePlayers() {
         for (int i = 0; i < playerList.length; i++) {
-            playerList[i] = new Player(Integer.toString(i));
+            playerList[i] = new Player("Player #" + i);
         }
     }
 
@@ -52,18 +51,42 @@ public class LadderAndSnake {
 
         determinePlayerOrder();
 
+
     }
 
 
     private void determinePlayerOrder() {
-        
+        int[] playerOrder = new int[playerList.length];
 
+        //Each player throws the dice
+        for (int i = 0; i < playerList.length; i++) {
+            playerOrder[i] = flipDice();
+            System.out.println(playerList[i].getName() + " flipped the dice and got: " + playerOrder[i]);
+        }
+
+        //Players are then sorted from highest to smallest value.
+        int temp; int counter; Player tempPlayer;
+        for (int i = 0; i < playerOrder.length; i++) {
+            counter = 0;
+            while (counter < playerOrder.length-1) {
+                if (playerOrder[counter] < playerOrder[counter + 1]) {
+                    temp = playerOrder[counter + 1];
+                    playerOrder[counter + 1] = playerOrder[counter];
+                    playerOrder[counter] = temp;
+
+                    tempPlayer = playerList[counter + 1];
+                    playerList[counter + 1] = playerList[counter];
+                    playerList[counter] = tempPlayer;
+                }
+                counter++;
+            }
+        }
     }
 
     private void namePlayers() {
         String answer;
+        System.out.println("Would you like to name your players? (yes or no): ");
         do {
-            System.out.println("Would you like to name your players? (yes or no): ");
             answer = keyboard.next().toLowerCase();
             if (!(answer.equals("yes") || answer.equals("no"))) {
                 System.out.println("Not a valid answer (yes or no). Try again: ");
@@ -72,7 +95,7 @@ public class LadderAndSnake {
 
         if (answer.equals("yes")) {
             for (Player player : playerList) {
-                System.out.println("Please put name for");
+                System.out.println("Please put name for Player #" + player.getName());
                 player.setName(keyboard.next());
             }
         } else {

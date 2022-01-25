@@ -25,6 +25,8 @@ public class PlayLadderAndSnake {
 
         LadderAndSnake game = new LadderAndSnake(playerCount);
 
+        game.play();
+
     }
 
 
