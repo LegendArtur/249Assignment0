@@ -49,31 +49,71 @@ public class LadderAndSnake {
 
     public void play() {
 
-        determinePlayerOrder();
+        determinePlayerOrder(playerList);
+
+//        while (hasDuplicates(playerList)) {
+//
+//        }
+
+        System.out.println("Final order of players:");
+        for (Player player : playerList) {
+            System.out.print(player.getName() + ", ");
+        }
+
+        boolean gameNotDone = true;
+        while (gameNotDone) {
+            for (Player player : playerList) {
+                player.move(flipDice());
+
+                if (player.getPosition() == 100) {
+                    gameNotDone = false;
+                    break;
+                }
+            }
+        }
 
 
     }
 
+    private Player[][] findDuplicatePlayers(Player[] playerList) {
 
-    private void determinePlayerOrder() {
-        int[] playerOrder = new int[playerList.length];
+        return null;
+
+    }
+
+    private boolean hasDuplicates(Player[] playerList) {
+
+        for (int i = 0; i < playerList.length-1; i++) {
+            if (playerList[i].getDiceThrow() == playerList[i+1].getDiceThrow()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    private void determinePlayerOrder(Player[] playerList) {
+        int[] playerValues = new int[playerList.length];
 
         //Each player throws the dice
         for (int i = 0; i < playerList.length; i++) {
-            playerOrder[i] = flipDice();
-            System.out.println(playerList[i].getName() + " flipped the dice and got: " + playerOrder[i]);
+            playerList[i].setDiceThrow(flipDice());
+            playerValues[i] = playerList[i].getDiceThrow();
+            System.out.println(playerList[i].getName() + " flipped the dice and got: " + playerValues[i]);
         }
 
         //Players are then sorted from highest to smallest value.
         int temp; int counter; Player tempPlayer;
-        for (int i = 0; i < playerOrder.length; i++) {
+        for (int i = 0; i < playerValues.length; i++) {
             counter = 0;
-            while (counter < playerOrder.length-1) {
-                if (playerOrder[counter] < playerOrder[counter + 1]) {
-                    temp = playerOrder[counter + 1];
-                    playerOrder[counter + 1] = playerOrder[counter];
-                    playerOrder[counter] = temp;
+            while (counter < playerValues.length-1) {
+                if (playerValues[counter] < playerValues[counter + 1]) {
+                    temp = playerValues[counter + 1];
+                    playerValues[counter + 1] = playerValues[counter];
+                    playerValues[counter] = temp;
 
+                    //The same permutations that are done on the dice values array are done on the Player array.
+                    // (therefore players are also sorted descending)
                     tempPlayer = playerList[counter + 1];
                     playerList[counter + 1] = playerList[counter];
                     playerList[counter] = tempPlayer;
@@ -81,6 +121,9 @@ public class LadderAndSnake {
                 counter++;
             }
         }
+
+
+
     }
 
     private void namePlayers() {
@@ -95,8 +138,8 @@ public class LadderAndSnake {
 
         if (answer.equals("yes")) {
             for (Player player : playerList) {
-                System.out.println("Please put name for Player #" + player.getName());
-                player.setName(keyboard.next());
+                System.out.println("Please put name for " + player.getName());
+                player.setName(keyboard.next() + keyboard.nextLine());
             }
         } else {
             System.out.println("No names will be assigned.");

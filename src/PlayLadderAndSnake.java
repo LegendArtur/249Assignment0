@@ -15,11 +15,16 @@ public class PlayLadderAndSnake {
         System.out.println("--------------------------------------------------------------\nWelcome to Ladder and Snake Java program by Artur Gubaidullin\n--------------------------------------------------------------");
 
         System.out.print("Please in put the number of players (between 2 and 4 inclusively): ");
-        int playerCount;
+        int playerCount = 0;
         do {
-            playerCount = keyboard.nextInt();
-            if (playerCount < 2 || playerCount > 4) {
-                System.out.print("The value is not between 2 and 4, please try again: ");
+            if (keyboard.hasNextInt()){
+                playerCount = keyboard.nextInt();
+                if (playerCount < 2 || playerCount > 4) {
+                    System.out.print("The value is not between 2 and 4, please try again: ");
+                }
+            } else {
+                System.out.println("The value entered is not a number! Try again: ");
+                keyboard.next();
             }
         } while (playerCount < 2 || playerCount > 4);
 
