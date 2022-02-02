@@ -10,7 +10,7 @@ public class PlayLadderAndSnake {
 
     static Scanner keyboard = new Scanner(System.in);
 
-    static int maxPlayers = 10; //This integer controls the max amount of Players.
+    static int maxPlayers = 4; //This integer controls the max amount of Players.
     //change the 4 to any number to test sorting algorithm.
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class PlayLadderAndSnake {
         int playerCount = 0;
         int attempts = 0;
 
-        System.out.print("Please input the number of players (between 2 and 4 inclusively): ");
+        System.out.print("Please input the number of players (between 2 and "+maxPlayers+" inclusively): ");
         do {
             if (keyboard.hasNextInt()){
                 playerCount = keyboard.nextInt();
