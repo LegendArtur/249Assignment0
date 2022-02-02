@@ -50,15 +50,16 @@ public class LadderAndSnake {
     public void play() {
 
         determinePlayerOrder(playerList);
-
-//        while (hasDuplicates(playerList)) {
-//
-//        }
-
-        System.out.println("Final order of players:");
-        for (Player player : playerList) {
-            System.out.print(player.getName() + ", ");
+        if (hasDuplicates(playerList)){
+            fixDuplicates(playerList);
         }
+
+        System.out.println("--------------------- Final order of players: ---------------------");
+        for (Player player : playerList) {
+            System.out.print(player.getName() + " ");
+        }
+
+        System.out.println("\n--------------------- The game is starting! ---------------------");
 
         boolean gameNotDone = true;
         while (gameNotDone) {
@@ -66,6 +67,8 @@ public class LadderAndSnake {
                 player.move(flipDice());
 
                 if (player.getPosition() == 100) {
+
+                    System.out.println("The game is over! " + player.getName() + " won the game !!!");
                     gameNotDone = false;
                     break;
                 }
@@ -73,12 +76,60 @@ public class LadderAndSnake {
         }
 
 
+
     }
 
-    private Player[][] findDuplicatePlayers(Player[] playerList) {
+    private void fixDuplicates(Player[] playerList) {
+        Duplicate[] duplicates = new Duplicate[] {};
+        for (int i = 0; i < playerList.length; i++) {
+            duplicates = addDuplicate(duplicates, playerList[i], i);
+        }
 
-        return null;
+        for (Duplicate duplicate : duplicates) {
+            if (duplicate.getPlayers().length > 1) {
+                Player[] playersToChange = duplicate.getPlayers();
+                System.out.print("---------------------\nPlayers ");
+                for (Player player : playersToChange) {
+                    System.out.print(player.getName() + " ");
+                }
+                System.out.println("got the same number! They play again:");
+                determinePlayerOrder(playersToChange);
 
+                if (hasDuplicates(playersToChange)) {
+                    //recursive method, that will fix duplicates only inside of th
+                    fixDuplicates(playersToChange);
+                }
+
+                for (int i = 0; i < playersToChange.length; i++){
+                    playerList[i + duplicate.getOriginalOrder()] = playersToChange[i];
+                }
+            }
+        }
+    }
+
+    private Duplicate[] addDuplicate(Duplicate[] duplicates, Player player, int originalOrder) {
+
+        boolean exists = false;
+        for (Duplicate duplicate : duplicates) {
+            if (duplicate.getDiceValue() == player.getDiceThrow()){
+                exists = true;
+                duplicate.addPlayer(player);
+                break;
+            }
+        }
+
+        if (!exists) {
+            Duplicate[] newDuplicates = new Duplicate[duplicates.length+1];
+            for (int i = 0; i < duplicates.length; i++) {
+                newDuplicates[i] = duplicates[i];
+            }
+
+            newDuplicates[duplicates.length] = new Duplicate(player, originalOrder) {};
+
+            return newDuplicates;
+        } else {
+            return duplicates;
+        }
     }
 
     private boolean hasDuplicates(Player[] playerList) {
@@ -121,9 +172,6 @@ public class LadderAndSnake {
                 counter++;
             }
         }
-
-
-
     }
 
     private void namePlayers() {

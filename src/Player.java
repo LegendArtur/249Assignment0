@@ -1,6 +1,6 @@
 // -----------------------------------------------------
 // Assignment #1 (or #0)
-// Question: Part 1 and 2 (extra class)
+// Question: Part 1 (extra class)
 // Written by: Artur Gubaidullin 40208924
 // -----------------------------------------------------
 
@@ -44,13 +44,12 @@ public class Player {
     public void move(int diceValue) {
         if ((position + diceValue) > 100) {
             position = 200-position-diceValue;
-
+            System.out.println(name + " threw and got : " + diceValue + ". They went over 100 !!! They go to " + position);
 
         } else {
             position += diceValue;
+            System.out.println(name + " threw and got : " + diceValue + ". They move to case " + position);
         }
-
-        System.out.println(name + " threw and got : " + diceValue + ". They move to case " + position);
 
         for (int[] snake : snakes) {
             if (position == snake[0]) {
