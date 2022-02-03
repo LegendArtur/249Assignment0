@@ -4,6 +4,10 @@
 // Written by: Artur Gubaidullin 40208924
 // -----------------------------------------------------
 
+//When a game is created, the specified number of Player objects is created.
+//Each player then throws a die, to determine their play order.
+//The highest player plays first and lowest last.
+
 
 import java.util.Random;
 import java.util.Scanner;

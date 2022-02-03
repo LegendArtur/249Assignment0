@@ -4,13 +4,18 @@
 // Written by: Artur Gubaidullin 40208924
 // -----------------------------------------------------
 
+//This program is a simulation of the Snakes and Ladders game.
+//It starts by asking the user the wanted number of players.
+//The user has 4 attempts to input a number between 2 and 4, after which the program closes
+//If the input is correct, the program creates and plays a new game with the desired number of players.
+
 import java.util.Scanner;
 
 public class PlayLadderAndSnake {
 
     static Scanner keyboard = new Scanner(System.in);
 
-    static final int maxPlayers = 4; //This integer controls the max amount of Players.
+    static final int maxPlayers = 10; //This integer controls the max amount of Players.
     //change the 4 to any number to test sorting algorithm.
 
     public static void main(String[] args) {
