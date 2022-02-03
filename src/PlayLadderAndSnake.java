@@ -10,7 +10,7 @@ public class PlayLadderAndSnake {
 
     static Scanner keyboard = new Scanner(System.in);
 
-    static int maxPlayers = 4; //This integer controls the max amount of Players.
+    static final int maxPlayers = 4; //This integer controls the max amount of Players.
     //change the 4 to any number to test sorting algorithm.
 
     public static void main(String[] args) {

@@ -10,14 +10,13 @@ import java.util.Scanner;
 
 public class LadderAndSnake {
 
-    private Scanner keyboard = new Scanner(System.in);
+    private final Scanner keyboard = new Scanner(System.in);
 
-    private int[][] board;
+    private Board board = new Board();
 
     private Player[] playerList;
 
     public LadderAndSnake() {
-        board = new int[10][10];
     }
 
     public LadderAndSnake(int playerCount) {
@@ -54,7 +53,7 @@ public class LadderAndSnake {
             fixDuplicates(playerList);
         }
 
-        System.out.println("--------------------- Final order of players: ---------------------");
+        System.out.println("--------------------- Final order of players --------------------");
         for (Player player : playerList) {
             System.out.print(player.getName() + " ");
         }
@@ -64,7 +63,7 @@ public class LadderAndSnake {
         boolean gameNotDone = true;
         while (gameNotDone) {
             for (Player player : playerList) {
-                player.move(flipDice());
+                board.move(flipDice(), player);
 
                 if (player.getPosition() == 100) {
 
@@ -88,11 +87,13 @@ public class LadderAndSnake {
         for (Duplicate duplicate : duplicates) {
             if (duplicate.getPlayers().length > 1) {
                 Player[] playersToChange = duplicate.getPlayers();
+
                 System.out.print("---------------------\nPlayers ");
                 for (Player player : playersToChange) {
                     System.out.print(player.getName() + " ");
                 }
                 System.out.println("got the same number! They play again:");
+
                 determinePlayerOrder(playersToChange);
 
                 if (hasDuplicates(playersToChange)) {
