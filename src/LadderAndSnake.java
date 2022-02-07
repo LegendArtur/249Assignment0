@@ -8,33 +8,39 @@
 //Each player then throws a die, to determine their play order.
 //The highest player plays first and lowest last.
 
+//importing Scanner for input and Random for dice throwing
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  * Artur Gubaidullin
  * COMP249
  * Assignment #1
  * Due Date 07/02/2022
+ *
+ * This is a single, complete game from start to finish.
  */
-
-//importing Scanner for input and Random for dice throwing
-import java.util.Random;
-import java.util.Scanner;
-
 public class LadderAndSnake {
-
 
     private final Scanner keyboard = new Scanner(System.in);
 
-    //Board stores all our snakes and ladders, as well as player movement.
+    /**
+     * Board stores all our snakes and ladders, as well as player movement.
+     */
     private Board board = new Board();
 
-    //List of players.
     private Player[] playerList;
 
-    //Default constructor
+    /**
+     * Default constructor
+     */
     public LadderAndSnake() {
     }
 
-    //Constructor with specified number of players
+    /**
+     * Constructor with specified number of players
+     * @param playerCount Selected number of players
+     */
     public LadderAndSnake(int playerCount) {
         this();
 
@@ -43,14 +49,18 @@ public class LadderAndSnake {
         namePlayers();
     }
 
-    //Creates the necessary amount of players.
+    /**
+     * Creates the necessary amount of players.
+     */
     private void initialisePlayers() {
         for (int i = 0; i < playerList.length; i++) {
             playerList[i] = new Player("Player #" + i);
         }
     }
 
-    //Checks if the user wants names, and in case they do, names the players one by one.
+    /**
+     * Checks if the user wants names, and in case they do, names the players one by one.
+     */
     private void namePlayers() {
         String answer;
         System.out.println("Would you like to name your players? (yes or no): ");
@@ -71,13 +81,18 @@ public class LadderAndSnake {
         }
     }
 
-    //Returns a values between 1 and 6 inclusively.
+    /**
+     * Returns a values between 1 and 6 inclusively.
+     * @return random integer value from 1 to 6.
+     */
     public int flipDice() {
         Random random = new Random();
         return random.nextInt(1, 7);
     }
 
-    //The actual gameplay, with order determination, rules, snakes, ladders, and a winner!
+    /**
+     * The actual gameplay, with order determination, rules, snakes, ladders, and a winner!
+     */
     public void play() {
 
         //Determines the order in which players are going to play
@@ -110,7 +125,11 @@ public class LadderAndSnake {
         }
     }
 
-    //Checks if there are any duplicates in given Player array.
+    /**
+     * Checks if there are any duplicates in given Player array.
+     * @param playerList Desired list of Players to verify
+     * @return boolean saying if there is booleans of not.
+     */
     private boolean hasDuplicates(Player[] playerList) {
 
         for (int i = 0; i < playerList.length-1; i++) {
@@ -121,7 +140,10 @@ public class LadderAndSnake {
         return false;
     }
 
-    //Determines the order of player by dice throw.
+    /**
+     * Determines the order of player by dice throw.
+     * @param playerList Player list to be reordered
+     */
     private void determinePlayerOrder(Player[] playerList) {
         int[] playerValues = new int[playerList.length];
 
@@ -153,7 +175,10 @@ public class LadderAndSnake {
         }
     }
 
-    //All duplicate throws (Players with same dice values) play again.
+    /**
+     * All duplicate throws (Players with same dice values) play again.
+     * @param playerList Player list that will get duplicate values fixed.
+     */
     private void fixDuplicates(Player[] playerList) {
         Duplicate[] duplicates = new Duplicate[] {};
 
@@ -190,8 +215,14 @@ public class LadderAndSnake {
         }
     }
 
-    //This adds a player their respective Duplicate (dice value wise)
-    //Or, if their value is not yet saved, creates a new Duplicate.
+    /**
+     * This adds a player their respective Duplicate (dice value wise)
+     * Or, if their value is not yet saved, create Duplicate.
+     * @param duplicates List of duplicates to which we will add a player.
+     * @param player Player to be added
+     * @param originalOrder His original position in his player list.
+     * @return List of Duplicates with added player or new Duplicate.
+     */
     private Duplicate[] addDuplicate(Duplicate[] duplicates, Player player, int originalOrder) {
 
         boolean exists = false;

@@ -5,49 +5,79 @@
 // -----------------------------------------------------
 
 /**
- * Artur Gubaidullin
- * COMP249
- * Assignment #1
- * Due Date 07/02/2022
+ * Player class. It simulates a real life player.
+ * @author Artur Gubaidullin
+ * @see <P>COMP249
+ * <P>Assignment #1
+ * <P>Due Date 07/02/2022
  */
-
-//Player class. It simulates a real life player.
 public class Player {
 
     private String name;
     private int position;
     private int diceThrow;
 
-    //Players start on position 0 by default.
+    /**
+     * Default constructor. Players start on position 0 by default.
+     */
     public Player() {
         position = 0;
     }
 
-
+    /**
+     * Player constructor with given name.
+     * @param name wanted name for player.
+     */
     public Player(String name) {
         this();
         this.name = name;
 
     }
 
-    //Getters and setters
+    /**
+     * Sets position to given integer.
+     * @param position new position of the player.
+     */
     public void setPosition(int position) {
         this.position = position;
     }
+
+    /**
+     * Returns current position.
+     * @return position of Player
+     */
     public int getPosition() {
         return position;
     }
 
+    /**
+     * Sets name to Player.
+     * @param name Player name
+     */
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Returns player's name.
+     * @return Player's name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns players current die throw.
+     * @return Player's dice value
+     */
     public int getDiceThrow() {
         return diceThrow;
     }
+
+    /**
+     * Sets Players last dice throw to given integer.
+     * @param diceThrow Value of the dice.
+     */
     public void setDiceThrow(int diceThrow) {
         this.diceThrow = diceThrow;
     }

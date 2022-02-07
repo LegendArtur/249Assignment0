@@ -9,17 +9,16 @@
 //The user has 4 attempts to input a number between 2 and 4, after which the program closes
 //If the input is correct, the program creates and plays a new game with the desired number of players.
 
-/**
- * Artur Gubaidullin
- * COMP249
- * Assignment #1
- * Due Date 07/02/2022
- */
-
 //importing Scanner for input
 import java.util.Scanner;
 
-//This is the driver class.
+/**
+ * This is the driver class.
+ * @author Artur Gubaidullin
+ * @see <P>COMP249
+ * <P>Assignment #1
+ * <P>Due Date 07/02/2022
+ */
 public class PlayLadderAndSnake {
 
     static Scanner keyboard = new Scanner(System.in);
@@ -27,6 +26,10 @@ public class PlayLadderAndSnake {
     static final int maxPlayers = 4; //This integer controls the max amount of Players.
     //change the 4 to any number to test sorting algorithm.
 
+    /**
+     * This is the main method.
+     * @param args not used.
+     */
     public static void main(String[] args) {
 
         System.out.println("--------------------------------------------------------------\nWelcome to Ladder and Snake Java program by Artur Gubaidullin\n--------------------------------------------------------------");

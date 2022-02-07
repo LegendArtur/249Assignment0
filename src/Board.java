@@ -5,13 +5,12 @@
 // -----------------------------------------------------
 
 /**
- * Artur Gubaidullin
- * COMP249
- * Assignment #1
- * Due Date 07/02/2022
+ * This represents a real life board. This is where players move.
+ * @author Artur Gubaidullin
+ * @see <P>COMP249
+ * <P>Assignment #1
+ * <P>Due Date 07/02/2022
  */
-
-//This represents a real life board. This is where players move.
 public class Board {
 
     private final int[][] snakes = new int[][] {
@@ -36,9 +35,16 @@ public class Board {
             new int[] {80,100},
     };
 
+    /**
+     * Default Constructor
+     */
     public Board() {}
 
-    //Player moves by the thrown dice value. (including all snake and ladder changes)
+    /**
+     * Player moves by the thrown dice value. (including all snake and ladder changes)
+     * @param diceValue Dice value that the player threw.
+     * @param player The player in question.
+     */
     public void move(int diceValue, Player player) {
         int position = player.getPosition();
         String name = player.getName();
